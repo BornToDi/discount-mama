@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dhaka Restaurant Discounts</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md p-4">
+        <div class="container mx-auto">
+            <h1 class="text-2xl font-bold text-gray-800">Dhaka Restaurant Discounts</h1>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto mt-10">
+        <!-- Search Area -->
+        <div class="flex justify-center">
+            <input type="text" placeholder="Select an Area (e.g., Gulshan, Dhanmondi)" 
+                class="w-1/2 p-4 rounded-lg shadow-md text-gray-700 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="locationInput">
+            <button 
+                onclick="filterRestaurants()"
+                class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg ml-4">
+                Search
+            </button>
+        </div>
+
+<!---filer-->
+  <!-- Sidebar for Filtering -->
+
+  <h2 class="text-xl font-bold text-gray-800 mb-4">Restaurants Offering Discounts:</h2>
+<!-- Sorting Dropdown -->
+<div class="flex justify-center mt-4">
+    <select id="sortOption" class="w-1/4 p-2 rounded-lg shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        <option value="none">Sort by Discount</option>
+        <option value="highToLow">Discount: High to Low</option>
+        <option value="lowToHigh">Discount: Low to High</option>
+    </select>
+</div>
+
+
+<div class="grid grid-cols-12">
+    <div class="col-span-4 p-4">
+        <h2 class="text-lg font-bold text-gray-800 mb-4">Filter by Discount Type:</h2>
+        <!-- Filter by Discount Type -->
+<div>
+    <label class="block mb-2">
+        <input type="checkbox" class="filter-checkbox" value="buy1get1" id="filter-buy1get1">
+        Buy 1 Get 1 Free
+    </label>
+    <label class="block mb-2">
+        <input type="checkbox" class="filter-checkbox" value="buy2get1" id="filter-buy2get1">
+        Buy 2 Get 1 Free
+    </label>
+    <label class="block mb-2">
+        <input type="checkbox" class="filter-checkbox" value="opening" id="filter-opening">
+        Opening Discount
+    </label>
+    <label class="block mb-2">
+        <input type="checkbox" class="filter-checkbox" value="anniversary" id="filter-anniversary">
+        1 Year Anniversary Discount
+    </label>
+    <label class="block mb-2">
+        <input type="checkbox" class="filter-checkbox" value="special" id="filter-special">
+        Special Discount
+    </label>
+</div>
+
+    </div>
+    <div class="col-span-8">
+        <!-- Restaurant List -->
+        <div class="mt-8">
+       
+            <div id="restaurantList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Restaurant Card -->
+                <div class="restaurant-card bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer" data-location="gulshan" data-discount-type="buy1get1" onclick="showDetails('Restaurant 2', 'Banani', 'Asian Fusion', 'Buy 1 Get 1 Free', 'Sushi, Noodles', 'https://www.google.com/maps/place/Banani,+Dhaka/@23.7947748,90.3954059,15z/')">
+                    <img class="w-full h-48 object-cover" src="https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg" alt="Restaurant Image">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-900">Restaurant 1</h3>
+                        <p class="text-gray-600 mt-2">Discount: Buy 1 Get 1 Free</p>
+                        <p class="text-gray-500 mt-1">Location: Gulshan 2</p>
+                        <p class="text-gray-500 mt-1">Cuisine: Italian</p>
+                    </div>
+                </div>
+                
+                
+                <!-- Another Restaurant Card -->
+                <div class="restaurant-card bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer" data-location="banani" data-discount-type="buy1get1" onclick="showDetails('Restaurant 2', 'Banani', 'Asian Fusion', 'Buy 1 Get 1 Free', 'Sushi, Noodles', 'https://www.google.com/maps/place/Banani,+Dhaka/@23.7947748,90.3954059,15z/')">
+                    <img class="w-full h-48 object-cover" src="https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg" alt="Restaurant Image">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-900">Restaurant 2</h3>
+                        <p class="text-gray-600 mt-2">Discount: Buy 1 Get 1 Free</p>
+                        <p class="text-gray-500 mt-1">Location: Banani</p>
+                        <p class="text-gray-500 mt-1">Cuisine: Asian Fusion</p>
+                    </div>
+                </div>
+                
+                <!-- Another Restaurant Card -->
+                <div class="restaurant-card bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer" data-location="dhanmondi" data-discount-type="15percentOff" onclick="showDetails('Restaurant 3', 'Dhanmondi', 'Continental', '15% Off', 'Steak, Burgers', 'https://www.google.com/maps/place/Dhanmondi,+Dhaka/@23.7501,90.3757,15z/')">
+                    <img class="w-full h-48 object-cover" src="https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg" alt="Restaurant Image">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-900">Restaurant 3</h3>
+                        <p class="text-gray-600 mt-2">Discount: 15% Off</p>
+                        <p class="text-gray-500 mt-1">Location: Dhanmondi</p>
+                        <p class="text-gray-500 mt-1">Cuisine: Continental</p>
+                    </div>
+                </div>
+                
+                <!-- Another Restaurant Card -->
+                <div class="restaurant-card bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer" data-location="banani" data-discount-type="buy2get1" onclick="showDetails('Restaurant 4', 'Banani', 'Continental', 'Buy 2 Get 1 Free', 'Pizza, Pasta', 'https://www.google.com/maps/place/Banani,+Dhaka/@23.7947748,90.3954059,15z/')">
+                    <img class="w-full h-48 object-cover" src="https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg" alt="Restaurant Image">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-900">Restaurant 4</h3>
+                        <p class="text-gray-600 mt-2">Discount: Buy 2 Get 1 Free</p>
+                        <p class="text-gray-500 mt-1">Location: Banani</p>
+                        <p class="text-gray-500 mt-1">Cuisine: Continental</p>
+                    </div>
+                </div>
+                
+                <!-- Another Restaurant Card -->
+                <div class="restaurant-card bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer" data-location="dhanmondi" data-discount-type="anniversary" onclick="showDetails('Restaurant 5', 'Dhanmondi', 'Continental', '1 Year Anniversary 50% Off', 'Steak, Burgers', 'https://www.google.com/maps/place/Dhanmondi,+Dhaka/@23.7501,90.3757,15z/')">
+                    <img class="w-full h-48 object-cover" src="https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg" alt="Restaurant Image">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-900">Restaurant 5</h3>
+                        <p class="text-gray-600 mt-2">Discount: 1 Year Anniversary 50% Off</p>
+                        <p class="text-gray-500 mt-1">Location: Dhanmondi</p>
+                        <p class="text-gray-500 mt-1">Cuisine: Continental</p>
+                    </div>
+                </div>
+                
+                <!-- Another Restaurant Card -->
+                <div class="restaurant-card bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer" data-location="dhanmondi" data-discount-type="10percentOff" onclick="showDetails('Restaurant 6', 'Dhanmondi', 'Continental', '10% Off', 'Salads, Pasta', 'https://www.google.com/maps/place/Dhanmondi,+Dhaka/@23.7501,90.3757,15z/')">
+                    <img class="w-full h-48 object-cover" src="https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg" alt="Restaurant Image">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-900">Restaurant 6</h3>
+                        <p class="text-gray-600 mt-2">Discount: 10% Off</p>
+                        <p class="text-gray-500 mt-1">Location: Dhanmondi</p>
+                        <p class="text-gray-500 mt-1">Cuisine: Continental</p>
+                    </div>
+                </div>
+                
+                <!-- Another Restaurant Card -->
+                <div class="restaurant-card bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer" data-location="dhanmondi" data-discount-type="15percentOff" onclick="showDetails('Restaurant 7', 'Dhanmondi', 'Continental', '15% Off', 'Steak, Burgers', 'https://www.google.com/maps/place/Dhanmondi,+Dhaka/@23.7501,90.3757,15z/')">
+                    <img class="w-full h-48 object-cover" src="https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg" alt="Restaurant Image">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-900">Restaurant 7</h3>
+                        <p class="text-gray-600 mt-2">Discount: 15% Off</p>
+                        <p class="text-gray-500 mt-1">Location: Dhanmondi</p>
+                        <p class="text-gray-500 mt-1">Cuisine: Continental</p>
+                    </div>
+                </div>
+                
+                <!-- Another Restaurant Card -->
+                <div class="restaurant-card bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer" data-location="dhanmondi" data-discount-type="15percentOff" onclick="showDetails('Restaurant 8', 'Dhanmondi', 'Continental', '15% Off', 'Steak, Burgers', 'https://www.google.com/maps/place/Dhanmondi,+Dhaka/@23.7501,90.3757,15z/')">
+                    <img class="w-full h-48 object-cover" src="https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg" alt="Restaurant Image">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-900">Restaurant 8</h3>
+                        <p class="text-gray-600 mt-2">Discount: 15% Off</p>
+                        <p class="text-gray-500 mt-1">Location: Dhanmondi</p>
+                        <p class="text-gray-500 mt-1">Cuisine: Continental</p>
+                    </div>
+                </div>
+                
+                <!-- Another Restaurant Card -->
+                <div class="restaurant-card bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer" data-location="mohakhali" data-discount-type="50percentOff" onclick="showDetails('Restaurant 9', 'Mohakhali', 'Continental', '50% Off', 'Various', 'https://www.google.com/maps/place/Mohakhali,+Dhaka/@23.7973,90.4060,15z/')">
+                    <img class="w-full h-48 object-cover" src="https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg" alt="Restaurant Image">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-900">Restaurant 9</h3>
+                        <p class="text-gray-600 mt-2">Discount: 50% Off</p>
+                        <p class="text-gray-500 mt-1">Location: Mohakhali</p>
+                        <p class="text-gray-500 mt-1">Cuisine: Continental</p>
+                    </div>
+                </div>
+            </div>
+            
+      </div>
+
+    </div>
+</div>
+
+     
+
+    </div>
+
+    <!-- Restaurant Details Modal -->
+    <div id="detailsModal" class="fixed z-10 inset-0 overflow-y-auto hidden" onclick="closeDetails()">
+        <div class="flex items-center justify-center min-h-screen" onclick="event.stopPropagation();">
+            <div class="bg-white rounded-lg shadow-xl p-6 max-w-lg w-full">
+                <div class="flex justify-between items-center">
+                    <h2 id="restaurantName" class="text-2xl font-bold"></h2>
+                    <button onclick="closeDetails()"  class="text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="mt-4">
+                    <p><strong>Address:</strong> <span id="restaurantLocation"></span></p>
+                    <p><strong>Cuisine:</strong> <span id="restaurantCuisine"></span></p>
+                    <p><strong>Discount:</strong> <span id="restaurantDiscount"></span></p>
+                    <p><strong>Discount Items:</strong> <span id="restaurantItems"></span></p>
+                    <p  onclick="window.location.href='https://www.burgerkingbangladesh.com/new/food-menu/8';"><strong> view online page: 
+                        <button>Click here</button>
+                    </strong></p>
+                    <p><strong>View Location on Google Maps:</strong></p>
+                    <a id="restaurantMapLink" href="javascript:void(0);" onclick="showMap()">Click here to view on Google Maps</a>
+
+                    <!-- Google Maps iframe for popup -->
+                    <div id="mapPopup" class="hidden mt-4">
+                        <iframe id="mapFrame" class="w-full h-64 border-0" src="" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 p-6 mt-10">
+        <div class="container mx-auto text-center">
+            <p class="text-white">© 2024 Dhaka Restaurant Discounts. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script>
+        // Function to filter and sort the restaurant list
+        function filterRestaurants() {
+            const locationInput = document.getElementById('locationInput').value.toLowerCase();
+            const sortOption = document.getElementById('sortOption').value;
+            const checkboxes = document.querySelectorAll('.filter-checkbox:checked');
+            const filters = Array.from(checkboxes).map(cb => cb.value);
+            const restaurants = Array.from(document.querySelectorAll('.restaurant-card'));
+    
+            // Filter based on location and discount type
+            const filteredRestaurants = restaurants.filter((restaurant) => {
+                const restaurantLocation = restaurant.getAttribute('data-location').toLowerCase();
+                const restaurantDiscountType = restaurant.getAttribute('data-discount-type');
+                
+                const locationMatch = restaurantLocation.includes(locationInput) || locationInput === "";
+                const discountMatch = filters.length === 0 || filters.includes(restaurantDiscountType);
+    
+                return locationMatch && discountMatch;
+            });
+    
+            // Sort based on discount if any sort option is selected
+            if (sortOption !== "none") {
+                filteredRestaurants.sort((a, b) => {
+                    const discountA = parseInt(a.querySelector('p.text-gray-600').innerText.match(/\d+/)) || 0;
+                    const discountB = parseInt(b.querySelector('p.text-gray-600').innerText.match(/\d+/)) || 0;
+    
+                    return sortOption === "highToLow" ? discountB - discountA : discountA - discountB;
+                });
+            }
+    
+            // Update the displayed restaurant list
+            const restaurantList = document.getElementById('restaurantList');
+            restaurantList.innerHTML = '';  // Clear existing list
+            filteredRestaurants.forEach(restaurant => {
+                restaurantList.appendChild(restaurant);  // Append filtered and sorted restaurants
+            });
+        }
+    
+        // Attach event listeners
+        document.getElementById('locationInput').addEventListener('input', filterRestaurants);
+        document.getElementById('sortOption').addEventListener('change', filterRestaurants);
+        
+        document.querySelectorAll('.filter-checkbox').forEach((checkbox) => {
+            checkbox.addEventListener('change', filterRestaurants);
+        });
+    
+        // Function to show restaurant details in a modal
+        function showDetails(name, location, cuisine, discount, items, mapLink) {
+            document.getElementById('restaurantName').innerText = name;
+            document.getElementById('restaurantLocation').innerText = location;
+            document.getElementById('restaurantCuisine').innerText = cuisine;
+            document.getElementById('restaurantDiscount').innerText = discount;
+            document.getElementById('restaurantItems').innerText = items;
+            
+            // Generate the embed URL from the provided mapLink
+            const embedURL = mapLink.replace('/place/', '/embed?pb=!1m18!1m12!1m3!1d' + 
+                '15967!2d90.4066082!3d23.7936706!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c70c15ea1de1%3A0x97856381e88fb311!2sGulshan%20'+ 
+                'Dhaka!5e0!3m2!1sen!2sbd!4v1677956437362!5m2!1sen!2sbd'); 
+            document.getElementById('mapFrame').src = embedURL;
+            document.getElementById('mapPopup').classList.remove('hidden');
+            
+            document.getElementById('detailsModal').classList.remove('hidden');
+        }
+    
+        // Function to show the map popup
+        function showMap() {
+            document.getElementById('mapPopup').classList.remove('hidden');
+        }
+    
+        // Function to close the details modal
+        function closeDetails() {
+            document.getElementById('detailsModal').classList.add('hidden');
+            document.getElementById('mapPopup').classList.add('hidden');  // Hide map popup
+            document.getElementById('mapFrame').src = '';  // Clear iframe src
+        }
+    </script>
+    
+    
+</body>
+</html>
